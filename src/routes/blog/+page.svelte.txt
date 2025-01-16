@@ -1,0 +1,20 @@
+<script>
+// Add blog post loading logic if needed
+</script>
+
+<div class="max-w-4xl mx-auto">
+  <h1 class="text-4xl font-bold mb-8">Blog</h1>
+  
+  <div class="space-y-8">
+    <!-- Blog Post Preview -->
+    <article class="border-b pb-8">
+      <h2 class="text-2xl font-semibold mb-2">
+        <a href="/blog/post-1" class="hover:text-blue-600">Blog Post Title</a>
+      </h2>
+      <p class="text-gray-600 mb-4">Posted on January 15, 2025</p>
+      <p class="text-gray-800">Preview of the blog post content...</p>
+      <a href="/blog/post-1" class="text-blue-500 hover:text-blue-700 mt-4 inline-block">Read more →</a>
+    </article>
+    <!-- Add more blog posts -->
+  </div>
+</div>

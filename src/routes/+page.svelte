@@ -1,8 +1,7 @@
-<script lang="ts">
-    import Header from '$lib/components/Header.svelte';
-    import Hero from '$lib/components/Hero.svelte';
+<script>
+  import Hero from '$lib/components/Hero.svelte';
+  import Projects from '$lib/components/Projects.svelte';
   </script>
   
-  <Header />
   <Hero />
-  
+  <Projects />
