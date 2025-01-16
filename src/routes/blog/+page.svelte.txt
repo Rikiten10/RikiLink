@@ -1,20 +1,71 @@
 <script>
-// Add blog post loading logic if needed
+  import BlogPost from '$lib/components/BlogPost.svelte';
+
+  const blogPosts = [
+    {
+      title: "Getting Started with SvelteKit",
+      date: "January 15, 2025",
+      excerpt: "Learn how to build modern web applications with SvelteKit...",
+      slug: "getting-started-with-sveltekit",
+      readingTime: "5",
+      author: "Your Name",
+      tags: ["SvelteKit", "Web Development", "Tutorial"]
+    },
+    {
+      title: "Mastering Tailwind CSS",
+      date: "January 10, 2025",
+      excerpt: "A comprehensive guide to using Tailwind CSS in your projects...",
+      slug: "mastering-tailwind-css",
+      readingTime: "7",
+      author: "Your Name",
+      tags: ["CSS", "Tailwind", "Design"]
+    }
+    // Add more blog posts as needed
+  ];
+
+  let selectedTag = '';
+  let searchQuery = '';
+
+  $: filteredPosts = blogPosts.filter(post => {
+    const matchesTag = !selectedTag || post.tags.includes(selectedTag);
+    const matchesSearch = !searchQuery || 
+      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesTag && matchesSearch;
+  });
+
+  // Get unique tags
+  $: tags = [...new Set(blogPosts.flatMap(post => post.tags))];
 </script>
 
-<div class="max-w-4xl mx-auto">
+<div class="max-w-4xl mx-auto px-4 py-12">
   <h1 class="text-4xl font-bold mb-8">Blog</h1>
-  
+
+  <div class="mb-8 space-y-4">
+    <!-- Search and filters -->
+    <div class="flex flex-col md:flex-row gap-4">
+      <input
+        type="text"
+        bind:value={searchQuery}
+        placeholder="Search posts..."
+        class="flex-grow p-2 border rounded-lg"
+      />
+      
+      <select
+        bind:value={selectedTag}
+        class="p-2 border rounded-lg"
+      >
+        <option value="">All Tags</option>
+        {#each tags as tag}
+          <option value={tag}>{tag}</option>
+        {/each}
+      </select>
+    </div>
+  </div>
+
   <div class="space-y-8">
-    <!-- Blog Post Preview -->
-    <article class="border-b pb-8">
-      <h2 class="text-2xl font-semibold mb-2">
-        <a href="/blog/post-1" class="hover:text-blue-600">Blog Post Title</a>
-      </h2>
-      <p class="text-gray-600 mb-4">Posted on January 15, 2025</p>
-      <p class="text-gray-800">Preview of the blog post content...</p>
-      <a href="/blog/post-1" class="text-blue-500 hover:text-blue-700 mt-4 inline-block">Read more →</a>
-    </article>
-    <!-- Add more blog posts -->
+    {#each filteredPosts as post}
+      <BlogPost {post} />
+    {/each}
   </div>
 </div>

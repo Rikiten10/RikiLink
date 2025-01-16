@@ -1,0 +1,54 @@
+<script>
+  import { page } from '$app/stores';
+
+  // In a real app, you'd fetch this data from your backend
+  const posts = {
+    'getting-started-with-sveltekit': {
+      title: "Getting Started with SvelteKit",
+      date: "January 15, 2025",
+      content: `
+        <p>Full article content would go here...</p>
+        <h2>Introduction</h2>
+        <p>SvelteKit is a framework for building web applications of all sizes...</p>
+      `,
+      author: "Your Name",
+      tags: ["SvelteKit", "Web Development", "Tutorial"]
+    },
+    // Add more posts...
+  };
+
+  $: post = posts[$page.params.slug];
+</script>
+
+{#if post}
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <header class="mb-8">
+      <h1 class="text-4xl font-bold mb-4">{post.title}</h1>
+      <div class="flex items-center gap-4 text-gray-600">
+        <span>{post.date}</span>
+        <span>·</span>
+        <span>By {post.author}</span>
+      </div>
+    </header>
+
+    <div class="prose prose-lg">
+      {@html post.content}
+    </div>
+
+    <div class="mt-8 pt-8 border-t">
+      <div class="flex flex-wrap gap-2">
+        {#each post.tags as tag}
+          <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full">
+            {tag}
+          </span>
+        {/each}
+      </div>
+    </div>
+  </article>
+{:else}
+  <div class="max-w-3xl mx-auto px-4 py-12">
+    <h1 class="text-4xl font-bold mb-4">Post not found</h1>
+    <p>The requested blog post could not be found.</p>
+    <a href="/blog" class="text-blue-600 hover:text-blue-800">← Back to blog</a>
+  </div>
+{/if}
