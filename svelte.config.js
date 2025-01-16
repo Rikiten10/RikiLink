@@ -1,10 +1,8 @@
-import adapter from '@sveltejs/adapter-netlify';
+import { sveltekit } from '@sveltejs/kit/vite';
 
-/** @type {import('@sveltejs/kit').Config} */
-const config = {
+export default {
   kit: {
-    adapter: adapter()
-  }
+    // existing configuration
+  },
+  preprocess: sveltekit(),
 };
-
-export default config;

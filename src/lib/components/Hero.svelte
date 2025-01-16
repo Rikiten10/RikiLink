@@ -13,17 +13,18 @@
       </p>
       <div class="flex justify-center space-x-4">
         
-          href="/projects"
+        <a href="/projects"
           class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
         >
           View Projects
         </a>
         
-          href="/contact"
+        <a href="/contact"
           class="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors"
         >
           Get in Touch
         </a>
+        
       </div>
     </div>
   </div>
