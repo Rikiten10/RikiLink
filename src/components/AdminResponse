@@ -1,0 +1,29 @@
+<script>
+  import { supabase } from '$lib/supabase';
+
+  export let suggestionId;
+  let adminResponse = "";
+
+  async function submitResponse() {
+    const { error } = await supabase
+      .from('suggestions')
+      .update({ admin_response: adminResponse })
+      .eq('id', suggestionId);
+
+    if (error) alert("Failed to submit response.");
+    else {
+      adminResponse = "";
+      alert("Response submitted successfully!");
+    }
+  }
+</script>
+
+<div class="admin-response-form">
+  <textarea
+    bind:value={adminResponse}
+    placeholder="Write a response..."
+    class="input mb-2"
+    rows="3"
+  ></textarea>
+  <button on:click={submitResponse} class="btn-primary">Submit Response</button>
+</div>
